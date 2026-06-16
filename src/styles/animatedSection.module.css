@@ -1,0 +1,59 @@
+.section {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 20px 0;
+  transition: all 0.8s cubic-bezier(0.2, 0.9, 0.4, 1);
+  will-change: transform, opacity;
+}
+
+/* Hero уходит в центр */
+.heroExit {
+  transform: scale(0.1) translateY(0) !important;
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+/* Галерея вырастает из центра */
+.galleryEnter {
+  animation: growFromCenter 0.8s cubic-bezier(0.2, 0.9, 0.4, 1) forwards;
+}
+
+@keyframes growFromCenter {
+  0% {
+    transform: scale(0.1) translateY(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(0.3) translateY(0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Секция About (для будущего использования) */
+.aboutEnter {
+  animation: slideUp 0.8s cubic-bezier(0.2, 0.9, 0.4, 1) forwards;
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(100%) scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Состояние анимации */
+.animating {
+  pointer-events: none;
+}

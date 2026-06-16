@@ -1,0 +1,41 @@
+.heroButton {
+  background-size: 200% 200%;
+  animation: gradientFlow 3s ease-in-out infinite;
+  transition: all 0.3s ease;
+}
+
+@keyframes gradientFlow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Эффект ряби при наведении */
+.heroButton::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 9999px;
+  background: linear-gradient(45deg, #8b5cf6, #ec4899, #06b6d4, #8b5cf6);
+  background-size: 300% 300%;
+  opacity: 0;
+  z-index: -1;
+  animation: borderGlow 4s ease-in-out infinite;
+  transition: opacity 0.3s ease;
+}
+
+.heroButton:hover::before {
+  opacity: 1;
+}
+
+@keyframes borderGlow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}

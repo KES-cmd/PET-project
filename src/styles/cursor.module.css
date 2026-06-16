@@ -1,0 +1,42 @@
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 2px solid #8b5cf6;
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.15s ease-out;
+}
+
+.cursorActive {
+  transform: scale(1.5);
+  background-color: #8b5cf6;
+  border: 2px solid white;
+}
+
+/* Прячем стандартный курсор на всём сайте */
+:global(body) {
+  cursor: none;
+}
+
+/* На мобилках показываем стандартный курсор */
+@media (max-width: 768px) {
+  .cursor {
+    display: none;
+  }
+  :global(body) {
+    cursor: auto;
+  }
+}
+
+/* Убираем руку-указатель на всех интерактивных элементах */
+:global(button), 
+:global(a), 
+:global([role="button"]) {
+  cursor: none !important;
+}

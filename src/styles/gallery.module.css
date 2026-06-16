@@ -1,0 +1,36 @@
+.galleryContainer {
+  scroll-behavior: smooth;
+  cursor: grab;
+  padding: 10px 0;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  /* Скрываем скроллбар */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.galleryContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.galleryTrack {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+}
+
+.slide {
+  flex-shrink: 0;
+  width: calc(100vw - 80px);
+  max-width: 400px;
+  scroll-snap-align: center;
+  transition: transform 0.3s ease;
+}
+
+/* Для больших экранов показываем по 2 карточки */
+@media (min-width: 900px) {
+  .slide {
+    width: calc(50vw - 60px);
+    max-width: 500px;
+  }
+}
