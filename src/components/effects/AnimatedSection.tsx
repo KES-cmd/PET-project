@@ -8,11 +8,18 @@ interface AnimatedSectionProps {
 }
 
 export function AnimatedSection({ section, children }: AnimatedSectionProps) {
-  const { activeSection, isTransitioning } = usePage();
+  const { activeSection, isTransitioning, isRevealed } = usePage();
   const [isVisible, setIsVisible] = useState(section === 'hero');
   const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
+    // Если всё открыто — показываем все секции
+    if (isRevealed) {
+      setIsVisible(true);
+      setIsAnimating(false);
+      return;
+    }
+    // Иначе — обычная логика переключения
     if (activeSection === section) {
       setIsAnimating(true);
       setIsVisible(true);
@@ -34,6 +41,7 @@ export function AnimatedSection({ section, children }: AnimatedSectionProps) {
   return (
     <div className={`
       ${styles.section}
+      ${isRevealed ? styles.revealed : ''}
       ${section === 'hero' && !isActive ? styles.heroExit : ''}
       ${section === 'gallery' && isActive ? styles.galleryEnter : ''}
       ${section === 'about' && isActive ? styles.aboutEnter : ''}

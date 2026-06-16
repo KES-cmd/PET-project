@@ -1,6 +1,8 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
 import { galleryItems } from '../../data/galleryData';
 import styles from '../../styles/gallery.module.css';
+import { NavigationButton } from './NavigationButton';
+import { usePage } from '../../context/PageContext';
 
 export function Gallery() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -9,6 +11,7 @@ export function Gallery() {
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
   const [isInitialized, setIsInitialized] = useState(false);
+  const { setActiveSection, setIsTransitioning } = usePage();
 
   // Дублируем элементы для бесконечной прокрутки (3 копии)
   const totalItems = galleryItems.length;
@@ -142,6 +145,16 @@ export function Gallery() {
     }
   };
 
+  const handleOpenAbout = () => {
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setActiveSection('about');
+      setTimeout(() => {
+        setIsTransitioning(false);
+      }, 800);
+    }, 300);
+  };
+
   return (
     <section className="py-8 px-4 min-h-screen flex flex-col justify-center">
       <div className="max-w-7xl mx-auto w-full">
@@ -238,6 +251,13 @@ export function Gallery() {
               aria-label={`Перейти к слайду ${index + 1}`}
             />
           ))}
+        </div>
+        <div className="flex justify-center mt-8">
+          <NavigationButton 
+            onClick={handleOpenAbout} 
+            label="Обо мне" 
+            direction="next" 
+          />
         </div>
       </div>
     </section>

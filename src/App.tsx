@@ -1,44 +1,59 @@
 import { CustomCursor } from './components/effects/CustomCursor';
 import { MovingGradient } from './components/effects/MovingGradient';
-import { PageProvider } from './context/PageContext';
+import { PageProvider, usePage } from './context/PageContext';
 import { AnimatedSection } from './components/effects/AnimatedSection';
 import { Hero } from './components/effects/Hero';
 import { ScrollProgress } from './components/effects/ScrollProgress';
 import { Gallery } from './components/effects/Gallery';
+import { About } from './components/effects/About';
 import morphingStyles from './styles/morphing.module.css';
 import noiseStyles  from './styles/noise.module.css';
+
+function AppContent() {
+  const { isRevealed } = usePage();
+
+  return (
+    <>
+      <CustomCursor />
+      <MovingGradient />
+      <ScrollProgress />
+      <div className={noiseStyles.noise}></div>
+      
+      {/* В режиме "всё открыто" — оборачиваем в обычный поток */}
+      {isRevealed ? (
+        <div className="relative">
+          <Hero />
+          <Gallery />
+          <About />
+        </div>
+      ) : (
+        <>
+          <AnimatedSection section="hero">
+            <Hero />
+          </AnimatedSection>
+          
+          <AnimatedSection section="gallery">
+            <div className="min-h-screen flex items-center justify-center">
+              <div className="w-full max-w-7xl mx-auto px-4">
+                <Gallery />
+              </div>
+            </div>
+          </AnimatedSection>
+          
+          <AnimatedSection section="about">
+            <About />
+          </AnimatedSection>
+        </>
+      )}
+    </>
+  );
+}
+
 
 function App() {
   return (
     <PageProvider>
-      <CustomCursor />
-      <MovingGradient />
-      <ScrollProgress />
-      <div className={morphingStyles.morphingShape}></div>
-      <div className={noiseStyles.noise}></div>
-
-      <AnimatedSection section="hero">
-        <Hero />
-      </AnimatedSection>
-
-      <AnimatedSection section="gallery">
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="w-full max-w-7xl mx-auto px-4">
-            <Gallery />
-          </div>
-        </div>
-      </AnimatedSection>
-      
-      <AnimatedSection section="about">
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="text-white text-center p-8">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Обо мне</h2>
-            <p className="text-xl max-w-2xl mx-auto">
-              Здесь будет информация о тебе
-            </p>
-          </div>
-        </div>
-      </AnimatedSection>
+      <AppContent />
     </PageProvider>
   );
 }

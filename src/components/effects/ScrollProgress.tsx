@@ -2,7 +2,7 @@ import { usePage } from '../../context/PageContext';
 import styles from '../../styles/scrollProgress.module.css';
 
 export function ScrollProgress() {
-  const { activeSection, setActiveSection, isTransitioning } = usePage();
+  const { activeSection, setActiveSection, isTransitioning, isRevealed } = usePage();
 
   // Определяем порядок секций
   const sections = ['hero', 'gallery', 'about'];
@@ -13,7 +13,7 @@ export function ScrollProgress() {
   const progress = ((currentIndex + 1) / sections.length) * 100;
 
   const handleClick = () => {
-    if (isTransitioning) return;
+    if (isTransitioning || isRevealed) return; // В режиме "всё открыто" клик не работает
     
     // Переключаем на следующую секцию по кругу
     const nextIndex = (currentIndex + 1) % sections.length;
@@ -24,7 +24,7 @@ export function ScrollProgress() {
   const offset = circumference - (progress / 100) * circumference;
 
   return (
-    <div className={styles.container} onClick={handleClick} title="Переключить секцию">
+    <div className={styles.container} onClick={handleClick} title={isRevealed ? "Все секции открыты" : "Переключить секцию"}>
       <svg className={styles.svg} viewBox="0 0 120 120">
         <defs>
           <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -34,7 +34,6 @@ export function ScrollProgress() {
           </linearGradient>
         </defs>
         
-        {/* Фоновый круг */}
         <circle
           className={styles.backgroundCircle}
           cx="60"
@@ -42,7 +41,6 @@ export function ScrollProgress() {
           r="45"
         />
         
-        {/* Прогресс-круг */}
         <circle
           className={styles.progressCircle}
           cx="60"
@@ -52,7 +50,6 @@ export function ScrollProgress() {
           strokeDashoffset={offset}
         />
         
-        {/* Текст с номером страницы */}
         <text
           x="60"
           y="60"
@@ -60,7 +57,7 @@ export function ScrollProgress() {
           textAnchor="middle"
           dominantBaseline="central"
         >
-          {currentIndex + 1}/{sections.length}
+          {isRevealed ? '✨' : `${Math.round(progress)}%`} {/* 👈 Меняем текст */}
         </text>
       </svg>
     </div>

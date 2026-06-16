@@ -13,12 +13,28 @@
   overscroll-behavior: contain;
 }
 
+.revealed {
+  position: relative !important;
+  height: auto !important;
+  min-height: 100vh;
+  opacity: 1 !important;
+  transform: none !important;
+  overflow-y: visible !important;
+  padding: 40px 0;
+}
+
+
 /* Для контента внутри секции */
 .section > div {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.revealed > div {
+  min-height: auto;
+  padding: 40px 0;
 }
 
 /* Hero уходит в центр */

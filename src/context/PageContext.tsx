@@ -5,6 +5,8 @@ interface PageContextType {
   setActiveSection: (section: 'hero' | 'gallery' | 'about') => void;
   isTransitioning: boolean;
   setIsTransitioning: (state: boolean) => void;
+  isRevealed: boolean;
+  setIsRevealed: (state: boolean) => void;
 }
 
 const PageContext = createContext<PageContextType | undefined>(undefined);
@@ -12,9 +14,10 @@ const PageContext = createContext<PageContextType | undefined>(undefined);
 export function PageProvider({ children }: { children: ReactNode }) {
   const [activeSection, setActiveSection] = useState<'hero' | 'gallery' | 'about'>('hero');
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isRevealed, setIsRevealed] = useState(false);
 
   return (
-    <PageContext.Provider value={{ activeSection, setActiveSection, isTransitioning, setIsTransitioning }}>
+    <PageContext.Provider value={{activeSection, setActiveSection, isTransitioning, setIsTransitioning, isRevealed, setIsRevealed }}>
       {children}
     </PageContext.Provider>
   );
