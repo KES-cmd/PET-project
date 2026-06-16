@@ -1,35 +1,30 @@
-import { useState, useEffect } from 'react';
+import { usePage } from '../../context/PageContext';
 import styles from '../../styles/scrollProgress.module.css';
 
 export function ScrollProgress() {
-  const [progress, setProgress] = useState(0);
+  const { activeSection, setActiveSection, isTransitioning } = usePage();
 
-  useEffect(() => {
-    const updateProgress = () => {
-      // Высота всей страницы
-      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-      // Сколько пикселей уже проскроллено
-      const scrolled = window.scrollY;
-      // Процент от 0 до 100
-      const newProgress = Math.min((scrolled / scrollHeight) * 100, 100);
-      setProgress(newProgress);
-    };
+  // Определяем порядок секций
+  const sections = ['hero', 'gallery', 'about'];
+  const currentIndex = sections.indexOf(activeSection);
+  
+  // Прогресс: 0% -> 33% -> 66% -> 100%
+  // Если секция hero — 33%, gallery — 66%, about — 100%
+  const progress = ((currentIndex + 1) / sections.length) * 100;
 
-    window.addEventListener('scroll', updateProgress);
-    window.addEventListener('resize', updateProgress);
-    updateProgress();
-
-    return () => {
-      window.removeEventListener('scroll', updateProgress);
-      window.removeEventListener('resize', updateProgress);
-    };
-  }, []);
+  const handleClick = () => {
+    if (isTransitioning) return;
+    
+    // Переключаем на следующую секцию по кругу
+    const nextIndex = (currentIndex + 1) % sections.length;
+    setActiveSection(sections[nextIndex] as 'hero' | 'gallery' | 'about');
+  };
 
   const circumference = 2 * Math.PI * 45;
   const offset = circumference - (progress / 100) * circumference;
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onClick={handleClick} title="Переключить секцию">
       <svg className={styles.svg} viewBox="0 0 120 120">
         <defs>
           <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -39,7 +34,7 @@ export function ScrollProgress() {
           </linearGradient>
         </defs>
         
-        {/* Фоновый круг (полупрозрачный белый) */}
+        {/* Фоновый круг */}
         <circle
           className={styles.backgroundCircle}
           cx="60"
@@ -47,7 +42,7 @@ export function ScrollProgress() {
           r="45"
         />
         
-        {/* Прогресс-круг (закрашивается от 0 до 100%) */}
+        {/* Прогресс-круг */}
         <circle
           className={styles.progressCircle}
           cx="60"
@@ -57,7 +52,7 @@ export function ScrollProgress() {
           strokeDashoffset={offset}
         />
         
-        {/* Процент внутри */}
+        {/* Текст с номером страницы */}
         <text
           x="60"
           y="60"
@@ -65,7 +60,7 @@ export function ScrollProgress() {
           textAnchor="middle"
           dominantBaseline="central"
         >
-          {Math.round(progress)}%
+          {currentIndex + 1}/{sections.length}
         </text>
       </svg>
     </div>

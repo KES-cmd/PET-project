@@ -1,8 +1,20 @@
 import { useState } from 'react';
+import { usePage } from '../../context/PageContext';
 import styles from '../../styles/hero.module.css';
 
 export function Hero() {
   const [isHovered, setIsHovered] = useState(false);
+  const { setActiveSection, setIsTransitioning } = usePage();
+
+  const handleOpenGallery = () => {
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setActiveSection('gallery');
+      setTimeout(() => {
+        setIsTransitioning(false);
+      }, 800);
+    }, 300);
+  };
 
   return (
     <section className="min-h-screen flex items-center justify-center px-4 relative">
@@ -39,6 +51,7 @@ export function Hero() {
             `}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
+            onClick={handleOpenGallery}
           >
             <span className="relative z-10 flex items-center gap-2">
               Посмотреть работы

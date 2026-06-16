@@ -8,6 +8,17 @@
   padding: 20px 0;
   transition: all 0.8s cubic-bezier(0.2, 0.9, 0.4, 1);
   will-change: transform, opacity;
+   /* Добавляем скролл внутри секции */
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* Для контента внутри секции */
+.section > div {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Hero уходит в центр */
