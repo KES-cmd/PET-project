@@ -1,18 +1,19 @@
-import { MovingGradient } from './components/effects/MovingGradient';
+//import { MovingGradient } from './components/effects/MovingGradient';
 import { PageProvider, usePage } from './context/PageContext';
 import { AnimatedSection } from './components/effects/AnimatedSection';
 import { Header } from './components/effects/Header';
 import { Background } from './components/effects/Background';
 import { Hero } from './components/effects/Hero';
-import { ScrollProgress } from './components/effects/ScrollProgress';
+import { ThemeProvider } from './context/ThemeContext';
+//import { ScrollProgress } from './components/effects/ScrollProgress';
 import { Gallery } from './components/effects/Gallery';
 import { About } from './components/effects/About';
-import { ColorPicker } from './components/effects/ColorPicker';
-import { CursorSwitcher } from './components/effects/CursorSwitcher';
+//import { ColorPicker } from './components/effects/ColorPicker';
+//import { CursorSwitcher } from './components/effects/CursorSwitcher';
 import { CustomCursor } from './components/effects/CustomCursor';
 import { CursorProvider } from './context/CursorContext';
-import morphingStyles from './styles/morphing.module.css';
-import noiseStyles  from './styles/noise.module.css';
+//import morphingStyles from './styles/morphing.module.css';
+//import noiseStyles  from './styles/noise.module.css';
 
 function AppContent() {
   const { isRevealed } = usePage();
@@ -54,9 +55,11 @@ function AppContent() {
 
 function App() {
   return (
-    <PageProvider>
-      <AppContent />
-    </PageProvider>
+    <ThemeProvider>
+      <PageProvider>
+        <AppContent />
+      </PageProvider>
+    </ThemeProvider>
   );
 }
 

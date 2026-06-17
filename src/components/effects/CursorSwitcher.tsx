@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useCursor, type CursorStyle } from '../../context/CursorContext';
+import { useTheme } from '../../context/ThemeContext';
+import { getHeaderGradient } from '../../utils/themeColors';
 import styles from '../../styles/cursorSwitcher.module.css';
 
 const cursorOptions: { id: CursorStyle; label: string; emoji: string }[] = [
@@ -10,6 +12,7 @@ const cursorOptions: { id: CursorStyle; label: string; emoji: string }[] = [
 
 export function CursorSwitcher() {
   const { cursorStyle, setCursorStyle } = useCursor();
+  const { themeColor } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -37,7 +40,12 @@ export function CursorSwitcher() {
         <span className={styles.currentEmoji}>{currentOption.emoji}</span>
       </button>
 
-      <div className={`${styles.menu} ${isOpen ? styles.menuOpen : ''}`}>
+      <div 
+        className={`${styles.menu} ${isOpen ? styles.menuOpen : ''}`}
+        style={{
+          background: getHeaderGradient(themeColor),
+        }}
+      >
         {cursorOptions.map((option) => (
           <button
             key={option.id}

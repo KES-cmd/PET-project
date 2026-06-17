@@ -13,7 +13,6 @@
   }
 }
 
-/* Эффект ряби при наведении */
 .heroButton::before {
   content: '';
   position: absolute;
@@ -29,6 +28,10 @@
 
 .heroButton:hover::before {
   opacity: 1;
+}
+
+.heroButton:hover {
+  box-shadow: 0 0 30px var(--glow-color, rgba(139, 92, 246, 0.5));
 }
 
 @keyframes borderGlow {

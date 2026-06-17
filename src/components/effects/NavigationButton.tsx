@@ -1,27 +1,52 @@
-//Скролл
+//Навигационная кнопка
 import { useState } from 'react';
+import { useTheme } from '../../context/ThemeContext';
+import { getButtonGradient, getButtonGlow, getCursorColor } from '../../utils/themeColors';
 import styles from '../../styles/navigationButton.module.css';
 
 interface NavigationButtonProps {
   onClick: () => void;
   label: string;
   direction?: 'next' | 'prev';
-  className?: string;
 }
 
 export function NavigationButton({ onClick, label, direction = 'next' }: NavigationButtonProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const { themeColor } = useTheme();
+
+  const buttonGradient = getButtonGradient(themeColor);
+  const buttonGlow = getButtonGlow(themeColor);
+  const cursorColor = getCursorColor(themeColor);
+
+  // 👇 Формируем градиент для обводки (::before) в цветах темы
+  const getBorderGradient = (color: string): string => {
+    const gradients: Record<string, string> = {
+      '#6c33ce': '#4c1d95, #7c3aed, #db2777, #4c1d95',
+      '#ce4388': '#be185d, #ec4899, #f97316, #be185d',
+      '#06b6d4': '#0e7490, #06b6d4, #10b981, #0e7490',
+      '#84cc16': '#4d7c0f, #84cc16, #22d3ee, #4d7c0f',
+    };
+    return gradients[color] || gradients['#6c33ce'];
+  };
+
+  const borderGradient = getBorderGradient(themeColor);
 
   return (
     <button
       className={`
         relative px-8 py-3 rounded-full font-semibold text-white
-        bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500
+        bg-gradient-to-r ${buttonGradient}
         bg-[length:200%_200%] transition-all duration-300
-        hover:shadow-[0_0_30px_rgba(139,92,246,0.5)]
+        hover:shadow-[0_0_30px_${buttonGlow}]
         ${styles.navButton}
         ${direction === 'prev' ? styles.prevButton : ''}
       `}
+      style={
+        {
+          '--glow-color': buttonGlow,
+          '--border-gradient': borderGradient,
+        } as React.CSSProperties
+      }
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={onClick}

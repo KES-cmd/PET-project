@@ -1,11 +1,13 @@
-//Приветственная страница
 import { useState } from 'react';
 import { usePage } from '../../context/PageContext';
+import { useTheme } from '../../context/ThemeContext';
+import { getButtonGradient, getButtonGlow, getWordGradient } from '../../utils/themeColors';
 import styles from '../../styles/hero.module.css';
 
 export function Hero() {
   const [isHovered, setIsHovered] = useState(false);
   const { setActiveSection, setIsTransitioning } = usePage();
+  const { themeColor } = useTheme();
 
   const handleOpenGallery = () => {
     setIsTransitioning(true);
@@ -17,39 +19,45 @@ export function Hero() {
     }, 300);
   };
 
+  const buttonGradient = getButtonGradient(themeColor);
+  const buttonGlow = getButtonGlow(themeColor);
+  const wordGradient = getWordGradient(themeColor);
+
   return (
     <section className="min-h-screen flex items-center justify-center px-4 relative">
       <div className="max-w-4xl mx-auto text-center">
-        {/* Основной заголовок */}
         <h1 className="mb-6">
           Создаю 
-          <span className="
-                text-transparent 
-                bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 
-                bg-clip-text 
-                [-webkit-text-stroke:_1px_rgba(255,255,255,0.5)]
-                [text-shadow:_0_0_30px_rgba(139,92,246,0.6),_0_0_60px_rgba(236,72,153,0.3)]
-          ">
+          <span className={`
+            text-transparent 
+            bg-gradient-to-r ${wordGradient}
+            bg-clip-text 
+            [-webkit-text-stroke:_1px_rgba(255,255,255,0.5)]
+            [text-shadow:_0_0_30px_rgba(139,92,246,0.6),_0_0_60px_rgba(236,72,153,0.3)]
+          `}>
             {' '}дизайнерские{' '}
           </span>
           эксперименты
         </h1>
 
-        {/* Подзаголовок */}
         <p className="text-gray-200 max-w-2xl mx-auto mb-10">
           Frontend-разработчик с любовью к анимациям, микро-интеракциям и нестандартным решениям
         </p>
 
-        {/* Кнопка с эффектом */}
         <div className="relative inline-block">
           <button
             className={`
               relative px-10 py-4 rounded-full font-semibold text-white
-              bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500
+              bg-gradient-to-r ${buttonGradient}
               bg-[length:200%_200%] transition-all duration-300
-              hover:shadow-[0_0_30px_rgba(139,92,246,0.5)]
+              hover:shadow-[0_0_30px_${buttonGlow}]
               ${styles.heroButton}
             `}
+            style={
+              {
+                '--glow-color': buttonGlow,
+              } as React.CSSProperties
+            }
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             onClick={handleOpenGallery}

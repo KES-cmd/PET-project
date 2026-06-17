@@ -1,10 +1,10 @@
 .navButton {
+  position: relative !important;
+  z-index: 999999 !important;
   background-size: 200% 200%;
   animation: gradientFlow 3s ease-in-out infinite;
   transition: all 0.3s ease;
   min-width: 160px;
-  position: relative !important;
-  z-index: 999999 !important; 
 }
 
 @keyframes gradientFlow {
@@ -16,12 +16,13 @@
   }
 }
 
+/* 👇 Обводка теперь использует переменную --border-gradient */
 .navButton::before {
   content: '';
   position: absolute;
   inset: -2px;
   border-radius: 9999px;
-  background: linear-gradient(45deg, #8b5cf6, #ec4899, #06b6d4, #8b5cf6);
+  background: linear-gradient(45deg, var(--border-gradient, #8b5cf6, #ec4899, #06b6d4, #8b5cf6));
   background-size: 300% 300%;
   opacity: 0;
   z-index: -1;
@@ -42,16 +43,11 @@
   }
 }
 
+.navButton:hover {
+  box-shadow: 0 0 30px var(--glow-color, rgba(139, 92, 246, 0.5));
+}
+
 /* Для кнопки "Назад" (если понадобится) */
 .prevButton {
   animation-direction: reverse;
-}
-
-@media (max-width: 768px) {
-  .navButton {
-    bottom: 24px;
-    min-width: 140px;
-    padding: 10px 20px;
-    font-size: 14px;
-  }
 }

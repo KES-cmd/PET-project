@@ -60,14 +60,15 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(139, 92, 246, 0.1);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #8b5cf6;
+  background: var(--scrollbar-color, #7c3aed);
   border-radius: 4px;
+  transition: background 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #7c3aed;
+  background: var(--scrollbar-hover, #6d28d9);
 }

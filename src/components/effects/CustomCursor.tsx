@@ -2,6 +2,8 @@
 import { useMousePosition } from '../../hooks/useMousePosition';
 import { useCursor } from '../../context/CursorContext';
 import { usePage } from '../../context/PageContext';
+import { useTheme } from '../../context/ThemeContext';
+import { getCursorColor, getCursorGlow } from '../../utils/themeColors';
 import styles from '../../styles/cursor.module.css';
 import { useState, useEffect } from 'react';
 
@@ -9,10 +11,13 @@ export function CustomCursor() {
   const { x, y } = useMousePosition();
   const { cursorStyle } = useCursor();
   const { isRevealed } = usePage();
+  const { themeColor } = useTheme();
   const [isHovering, setIsHovering] = useState(false);
 
+  const cursorColor = getCursorColor(themeColor);
+  const cursorGlow = getCursorGlow(themeColor);
+
   useEffect(() => {
-    // Если всё открыто — отключаем эффект наведения
     if (isRevealed) {
       setIsHovering(false);
       return;
@@ -20,7 +25,6 @@ export function CustomCursor() {
 
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      // Проверяем, что элемент интерактивный: кнопка, ссылка, .slide, или индикаторы галереи
       if (
         target.closest('button') !== null ||
         target.closest('a') !== null ||
@@ -36,7 +40,6 @@ export function CustomCursor() {
       const target = e.target as HTMLElement;
       const relatedTarget = e.relatedTarget as HTMLElement;
 
-      // Проверяем, что мы действительно покидаем интерактивный элемент
       const isLeavingInteractive =
         target.closest('button') !== null ||
         target.closest('a') !== null ||
@@ -44,7 +47,6 @@ export function CustomCursor() {
         target.closest('.slide') !== null ||
         target.closest('.cursor-interactive') !== null;
 
-      // Проверяем, что не переходим на другой интерактивный элемент
       const isEnteringInteractive =
         relatedTarget?.closest('button') !== null ||
         relatedTarget?.closest('a') !== null ||
@@ -73,7 +75,6 @@ export function CustomCursor() {
       transition: 'transform 0.15s ease-out',
     };
 
-    // Если всё открыто — никаких изменений при наведении
     const isActive = isRevealed ? false : isHovering;
 
     switch (cursorStyle) {
@@ -84,12 +85,12 @@ export function CustomCursor() {
           height: '32px',
           borderRadius: '50%',
           background: isActive
-            ? 'rgba(236, 72, 153, 0.6)'
-            : 'rgba(236, 72, 153, 0.3)',
-          border: '2px solid #ec4899',
+            ? `${cursorColor}99`  // 60% прозрачности
+            : `${cursorColor}4D`,  // 30% прозрачности
+          border: `2px solid ${cursorColor}`,
           boxShadow: isActive
-            ? '0 0 40px rgba(236, 72, 153, 0.9), 0 0 80px rgba(236, 72, 153, 0.4)'
-            : '0 0 30px rgba(236, 72, 153, 0.8), 0 0 60px rgba(236, 72, 153, 0.4)',
+            ? `0 0 40px ${cursorGlow}, 0 0 80px ${cursorColor}66`
+            : `0 0 30px ${cursorGlow}, 0 0 60px ${cursorColor}4D`,
           transition: 'all 0.2s cubic-bezier(0.2, 0.9, 0.4, 1)',
         };
       case 'minimal':
@@ -99,7 +100,7 @@ export function CustomCursor() {
           height: '8px',
           borderRadius: '50%',
           background: isActive
-            ? 'rgba(255, 255, 255, 1)'
+            ? '#ffffff'
             : 'rgba(255, 255, 255, 0.7)',
           border: 'none',
           boxShadow: 'none',
@@ -113,12 +114,12 @@ export function CustomCursor() {
           height: '32px',
           borderRadius: '50%',
           background: isActive
-            ? 'rgba(139, 92, 246, 0.8)'
+            ? cursorColor
             : 'rgba(255, 255, 255, 0.9)',
-          border: `2px solid ${isActive ? '#ffffff' : '#8b5cf6'}`,
+          border: `2px solid ${isActive ? '#ffffff' : cursorColor}`,
           boxShadow: isActive
-            ? '0 0 20px rgba(139, 92, 246, 0.6)'
-            : '0 0 10px rgba(139, 92, 246, 0.5)',
+            ? `0 0 30px ${cursorGlow}, 0 0 60px ${cursorColor}4D`
+            : `0 0 10px ${cursorGlow}`,
           transition: 'all 0.2s cubic-bezier(0.2, 0.9, 0.4, 1)',
         };
     }
