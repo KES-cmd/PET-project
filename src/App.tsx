@@ -1,6 +1,8 @@
 import { MovingGradient } from './components/effects/MovingGradient';
 import { PageProvider, usePage } from './context/PageContext';
 import { AnimatedSection } from './components/effects/AnimatedSection';
+import { Header } from './components/effects/Header';
+import { Background } from './components/effects/Background';
 import { Hero } from './components/effects/Hero';
 import { ScrollProgress } from './components/effects/ScrollProgress';
 import { Gallery } from './components/effects/Gallery';
@@ -18,15 +20,11 @@ function AppContent() {
   return (
     <CursorProvider>
       <CustomCursor />
-      <MovingGradient />
-      <ScrollProgress />
-      <ColorPicker />
-      <CursorSwitcher />
-      <div className={noiseStyles.noise}></div>
-      
-      {/* В режиме "всё открыто" — оборачиваем в обычный поток */}
+      <Background />
+      <Header />
+
       {isRevealed ? (
-        <div className="relative">
+        <div className="relative pt-20">
           <Hero />
           <Gallery />
           <About />
@@ -36,15 +34,15 @@ function AppContent() {
           <AnimatedSection section="hero">
             <Hero />
           </AnimatedSection>
-          
+
           <AnimatedSection section="gallery">
-            <div className="min-h-screen flex items-center justify-center">
+            <div className="min-h-screen flex items-center justify-center pt-20">
               <div className="w-full max-w-7xl mx-auto px-4">
                 <Gallery />
               </div>
             </div>
           </AnimatedSection>
-          
+
           <AnimatedSection section="about">
             <About />
           </AnimatedSection>
@@ -53,7 +51,6 @@ function AppContent() {
     </CursorProvider>
   );
 }
-
 
 function App() {
   return (

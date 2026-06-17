@@ -1,8 +1,7 @@
 .container {
-  position: fixed;
-  top: 80px;  
-  right: 20px;
-  z-index: 99999;
+  position: relative;
+  display: inline-block;
+  animation: slideIn 0.6s cubic-bezier(0.2, 0.9, 0.4, 1) 0.6s both;
 }
 
 /* Кнопка-переключатель */
@@ -21,7 +20,6 @@
   transition: all 0.3s ease;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   position: relative;
-  z-index: 99999;
 }
 
 .toggleButton:hover {
@@ -31,15 +29,15 @@
 }
 
 .icon {
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1;
 }
 
 .currentEmoji {
-  font-size: 12px;
+  font-size: 11px;
   position: absolute;
   bottom: 4px;
-  right: 6px;
+  right: 4px;
   background: rgba(0, 0, 0, 0.5);
   border-radius: 50%;
   width: 18px;
@@ -47,7 +45,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 10px;
 }
 
 /* Выпадающее меню */
@@ -56,7 +53,7 @@
   top: calc(100% + 12px);
   right: 0;
   min-width: 180px;
-  background: rgba(255, 255, 255, 0.08);
+  background: linear-gradient(135deg, #4c1d95, #7c3aed, #db2777);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
@@ -67,7 +64,6 @@
   pointer-events: none;
   transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1);
   transform-origin: top right;
-  z-index: 99999;
 }
 
 .menuOpen {
@@ -95,11 +91,11 @@
 }
 
 .option:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .option.active {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .optionEmoji {

@@ -3,6 +3,8 @@
   animation: gradientFlow 3s ease-in-out infinite;
   transition: all 0.3s ease;
   min-width: 160px;
+  position: relative !important;
+  z-index: 999999 !important; 
 }
 
 @keyframes gradientFlow {
@@ -43,4 +45,13 @@
 /* Для кнопки "Назад" (если понадобится) */
 .prevButton {
   animation-direction: reverse;
+}
+
+@media (max-width: 768px) {
+  .navButton {
+    bottom: 24px;
+    min-width: 140px;
+    padding: 10px 20px;
+    font-size: 14px;
+  }
 }

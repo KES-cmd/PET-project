@@ -4,8 +4,8 @@ import styles from '../../styles/colorPicker.module.css';
 
 // Доступные цвета
 const colors = [
-  { name: 'Фиолетовый', value: '#7c3aed', gradient: 'from-purple-500 to-pink-500' },
-  { name: 'Розовый неон', value: '#ec4899', gradient: 'from-pink-500 to-rose-500' },
+  { name: 'Фиолетовый', value: '#6c33ce', gradient: 'from-purple-500 to-pink-500' },
+  { name: 'Розовый неон', value: '#ce4388', gradient: 'from-pink-500 to-rose-500' },
   { name: 'Океан', value: '#06b6d4', gradient: 'from-cyan-500 to-blue-500' },
   { name: 'Лайм', value: '#84cc16', gradient: 'from-lime-500 to-emerald-500' },
 ];
@@ -56,7 +56,6 @@ export function ColorPicker() {
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Выбрать тему"
         title="Сменить тему"
-        data-interactive
       >
         <span className={styles.icon}>🎨</span>
         <span 

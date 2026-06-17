@@ -28,9 +28,9 @@ export function MovingGradient() {
   const getGradientColors = (color: string) => {
     // Для каждого цвета своя палитра
     const palettes: Record<string, string[]> = {
-      '#7c3aed': ['#7c3aed', '#ec4899', '#8b5cf6'],
-      '#ec4899': ['#ec4899', '#f43f5e', '#fb7185'],
-      '#06b6d4': ['#06b6d4', '#3b82f6', '#8b5cf6'],
+      '#6c33ce': ['#7539ce', '#a577f3', '#db2777'],
+      '#ce4388': ['#be185d', '#ec4899', '#f72552'],
+      '#06b6d4': ['#2a75a0', '#0891b2', '#10b981'],
       '#84cc16': ['#84cc16', '#22d3ee', '#10b981'],
     };
     return palettes[color] || ['#7c3aed', '#ec4899', '#8b5cf6'];

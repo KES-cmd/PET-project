@@ -7,17 +7,28 @@ html {
   font-size: clamp(16px, 1rem + 0.5vw, 20px);
 }
 
+/* Глобальный фон — спокойный тёмный */
+body {
+  background: #0d0d0d;
+  background-image: 
+    radial-gradient(ellipse at 20% 50%, rgba(139, 92, 246, 0.05) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 50%, rgba(236, 72, 153, 0.05) 0%, transparent 60%);
+  min-height: 100vh;
+}
+
 /* Заголовки */
 h1 {
   font-size: clamp(2.5rem, 6vw, 5rem);
   font-weight: 700;
   line-height: 1.1;
+  color: white;
 }
 
 h2 {
   font-size: clamp(2rem, 4vw, 3.5rem);
   font-weight: 600;
   line-height: 1.2;
+  color: white;
 }
 
 h3 {
@@ -30,6 +41,7 @@ h3 {
 p {
   font-size: clamp(1rem, 1.5vw, 1.25rem);
   line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 /* Кнопки */

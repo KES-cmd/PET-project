@@ -1,3 +1,4 @@
+//Скролл
 import { useState } from 'react';
 import styles from '../../styles/navigationButton.module.css';
 
@@ -5,6 +6,7 @@ interface NavigationButtonProps {
   onClick: () => void;
   label: string;
   direction?: 'next' | 'prev';
+  className?: string;
 }
 
 export function NavigationButton({ onClick, label, direction = 'next' }: NavigationButtonProps) {
