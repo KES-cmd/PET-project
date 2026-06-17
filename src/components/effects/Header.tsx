@@ -20,7 +20,7 @@ export function Header() {
         <ScrollProgress />
       </div>
       <div className={styles.center}>
-        <span className={styles.logo}>✦</span>
+        <span className={styles.logo}></span>
       </div>
       <div className={styles.right}>
         <ColorPicker />

@@ -1,8 +1,9 @@
 .container {
   display: inline-block;
-  width: 52px;
-  height: 52px;
+  width: 65px;
+  height: 65px;
   cursor: pointer;
+  margin-left: 24px;
   transition: transform 0.3s ease;
 }
 
