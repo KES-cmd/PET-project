@@ -1,32 +1,70 @@
 //Описывает форму и состояние мышки
 import { useMousePosition } from '../../hooks/useMousePosition';
 import { useCursor } from '../../context/CursorContext';
+import { usePage } from '../../context/PageContext';
 import styles from '../../styles/cursor.module.css';
 import { useState, useEffect } from 'react';
 
 export function CustomCursor() {
   const { x, y } = useMousePosition();
   const { cursorStyle } = useCursor();
+  const { isRevealed } = usePage();
   const [isHovering, setIsHovering] = useState(false);
 
   useEffect(() => {
-    const handleMouseOver = () => setIsHovering(true);
-    const handleMouseOut = () => setIsHovering(false);
+    // Если всё открыто — отключаем эффект наведения
+    if (isRevealed) {
+      setIsHovering(false);
+      return;
+    }
 
-    const interactiveElements = document.querySelectorAll('button, a, [role="button"]');
-    
-    interactiveElements.forEach((el) => {
-      el.addEventListener('mouseover', handleMouseOver);
-      el.addEventListener('mouseout', handleMouseOut);
-    });
+    const handleMouseOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      // Проверяем, что элемент интерактивный: кнопка, ссылка, .slide, или индикаторы галереи
+      if (
+        target.closest('button') !== null ||
+        target.closest('a') !== null ||
+        target.closest('[role="button"]') !== null ||
+        target.closest('.slide') !== null ||
+        target.closest('.cursor-interactive') !== null
+      ) {
+        setIsHovering(true);
+      }
+    };
+
+    const handleMouseOut = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const relatedTarget = e.relatedTarget as HTMLElement;
+
+      // Проверяем, что мы действительно покидаем интерактивный элемент
+      const isLeavingInteractive =
+        target.closest('button') !== null ||
+        target.closest('a') !== null ||
+        target.closest('[role="button"]') !== null ||
+        target.closest('.slide') !== null ||
+        target.closest('.cursor-interactive') !== null;
+
+      // Проверяем, что не переходим на другой интерактивный элемент
+      const isEnteringInteractive =
+        relatedTarget?.closest('button') !== null ||
+        relatedTarget?.closest('a') !== null ||
+        relatedTarget?.closest('[role="button"]') !== null ||
+        relatedTarget?.closest('.slide') !== null ||
+        relatedTarget?.closest('.cursor-interactive') !== null;
+
+      if (isLeavingInteractive && !isEnteringInteractive) {
+        setIsHovering(false);
+      }
+    };
+
+    document.addEventListener('mouseover', handleMouseOver);
+    document.addEventListener('mouseout', handleMouseOut);
 
     return () => {
-      interactiveElements.forEach((el) => {
-        el.removeEventListener('mouseover', handleMouseOver);
-        el.removeEventListener('mouseout', handleMouseOut);
-      });
+      document.removeEventListener('mouseover', handleMouseOver);
+      document.removeEventListener('mouseout', handleMouseOut);
     };
-  }, []);
+  }, [isRevealed]);
 
   // Выбор стиля курсора
   const getCursorStyles = () => {
@@ -35,6 +73,9 @@ export function CustomCursor() {
       transition: 'transform 0.15s ease-out',
     };
 
+    // Если всё открыто — никаких изменений при наведении
+    const isActive = isRevealed ? false : isHovering;
+
     switch (cursorStyle) {
       case 'neon':
         return {
@@ -42,9 +83,13 @@ export function CustomCursor() {
           width: '32px',
           height: '32px',
           borderRadius: '50%',
-          background: 'rgba(236, 72, 153, 0.3)',
+          background: isActive
+            ? 'rgba(236, 72, 153, 0.6)'
+            : 'rgba(236, 72, 153, 0.3)',
           border: '2px solid #ec4899',
-          boxShadow: '0 0 30px rgba(236, 72, 153, 0.8), 0 0 60px rgba(236, 72, 153, 0.4)',
+          boxShadow: isActive
+            ? '0 0 40px rgba(236, 72, 153, 0.9), 0 0 80px rgba(236, 72, 153, 0.4)'
+            : '0 0 30px rgba(236, 72, 153, 0.8), 0 0 60px rgba(236, 72, 153, 0.4)',
           transition: 'all 0.2s cubic-bezier(0.2, 0.9, 0.4, 1)',
         };
       case 'minimal':
@@ -53,7 +98,9 @@ export function CustomCursor() {
           width: '8px',
           height: '8px',
           borderRadius: '50%',
-          background: 'rgba(255, 255, 255, 0.9)',
+          background: isActive
+            ? 'rgba(255, 255, 255, 1)'
+            : 'rgba(255, 255, 255, 0.7)',
           border: 'none',
           boxShadow: 'none',
           transition: 'all 0.2s cubic-bezier(0.2, 0.9, 0.4, 1)',
@@ -65,12 +112,12 @@ export function CustomCursor() {
           width: '32px',
           height: '32px',
           borderRadius: '50%',
-          background: isHovering 
-            ? 'rgba(139, 92, 246, 0.7)' 
+          background: isActive
+            ? 'rgba(139, 92, 246, 0.8)'
             : 'rgba(255, 255, 255, 0.9)',
-          border: `2px solid ${isHovering ? 'white' : '#8b5cf6'}`,
-          boxShadow: isHovering 
-            ? '0 0 30px rgba(139, 92, 246, 0.5)' 
+          border: `2px solid ${isActive ? '#ffffff' : '#8b5cf6'}`,
+          boxShadow: isActive
+            ? '0 0 20px rgba(139, 92, 246, 0.6)'
             : '0 0 10px rgba(139, 92, 246, 0.5)',
           transition: 'all 0.2s cubic-bezier(0.2, 0.9, 0.4, 1)',
         };
@@ -80,7 +127,10 @@ export function CustomCursor() {
   return (
     <div
       className={styles.cursor}
-      style={getCursorStyles()}
+      style={{
+        ...getCursorStyles(),
+        willChange: 'transform, background',
+      }}
     />
   );
 }

@@ -247,6 +247,7 @@ export function Gallery() {
                   ? 'bg-purple-500 w-8' 
                   : 'bg-white/30 hover:bg-white/50'
                 }
+                cursor-interactive
               `}
               onClick={() => scrollToSlide(index)}
               aria-label={`Перейти к слайду ${index + 1}`}
