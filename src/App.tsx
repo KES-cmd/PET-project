@@ -1,4 +1,3 @@
-import { CustomCursor } from './components/effects/CustomCursor';
 import { MovingGradient } from './components/effects/MovingGradient';
 import { PageProvider, usePage } from './context/PageContext';
 import { AnimatedSection } from './components/effects/AnimatedSection';
@@ -7,6 +6,9 @@ import { ScrollProgress } from './components/effects/ScrollProgress';
 import { Gallery } from './components/effects/Gallery';
 import { About } from './components/effects/About';
 import { ColorPicker } from './components/effects/ColorPicker';
+import { CursorSwitcher } from './components/effects/CursorSwitcher';
+import { CustomCursor } from './components/effects/CustomCursor';
+import { CursorProvider } from './context/CursorContext';
 import morphingStyles from './styles/morphing.module.css';
 import noiseStyles  from './styles/noise.module.css';
 
@@ -14,11 +16,12 @@ function AppContent() {
   const { isRevealed } = usePage();
 
   return (
-    <>
+    <CursorProvider>
       <CustomCursor />
       <MovingGradient />
       <ScrollProgress />
       <ColorPicker />
+      <CursorSwitcher />
       <div className={noiseStyles.noise}></div>
       
       {/* В режиме "всё открыто" — оборачиваем в обычный поток */}
@@ -47,7 +50,7 @@ function AppContent() {
           </AnimatedSection>
         </>
       )}
-    </>
+    </CursorProvider>
   );
 }
 
