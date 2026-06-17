@@ -13,9 +13,7 @@ export function CustomCursor() {
     const handleMouseOver = () => setIsHovering(true);
     const handleMouseOut = () => setIsHovering(false);
 
-    const interactiveElements = document.querySelectorAll(
-      'button:not([data-cursor-hidden]), a:not([data-cursor-hidden]), [role="button"]:not([data-cursor-hidden])'
-    );
+    const interactiveElements = document.querySelectorAll('button, a, [role="button"]');
     
     interactiveElements.forEach((el) => {
       el.addEventListener('mouseover', handleMouseOver);
@@ -41,8 +39,8 @@ export function CustomCursor() {
       case 'neon':
         return {
           ...base,
-          width: isHovering ? '48px' : '32px',
-          height: isHovering ? '48px' : '32px',
+          width: '32px',
+          height: '32px',
           borderRadius: '50%',
           background: 'rgba(236, 72, 153, 0.3)',
           border: '2px solid #ec4899',
@@ -52,8 +50,8 @@ export function CustomCursor() {
       case 'minimal':
         return {
           ...base,
-          width: isHovering ? '16px' : '8px',
-          height: isHovering ? '16px' : '8px',
+          width: '8px',
+          height: '8px',
           borderRadius: '50%',
           background: 'rgba(255, 255, 255, 0.9)',
           border: 'none',
@@ -64,8 +62,8 @@ export function CustomCursor() {
       default:
         return {
           ...base,
-          width: isHovering ? '48px' : '32px',
-          height: isHovering ? '48px' : '32px',
+          width: '32px',
+          height: '32px',
           borderRadius: '50%',
           background: isHovering 
             ? 'rgba(139, 92, 246, 0.7)' 

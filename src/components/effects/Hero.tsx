@@ -29,7 +29,6 @@ export function Hero() {
                 bg-clip-text 
                 [-webkit-text-stroke:_1px_rgba(255,255,255,0.5)]
                 [text-shadow:_0_0_30px_rgba(139,92,246,0.6),_0_0_60px_rgba(236,72,153,0.3)]
-                animate-in
           ">
             {' '}дизайнерские{' '}
           </span>

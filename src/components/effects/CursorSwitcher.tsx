@@ -32,7 +32,6 @@ export function CursorSwitcher() {
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Сменить курсор"
         title="Сменить курсор"
-        data-cursor-hidden
       >
         <span className={styles.icon}>🖱️</span>
         <span className={styles.currentEmoji}>{currentOption.emoji}</span>
@@ -47,7 +46,6 @@ export function CursorSwitcher() {
               setCursorStyle(option.id);
               setIsOpen(false);
             }}
-            data-cursor-hidden
           >
             <span className={styles.optionEmoji}>{option.emoji}</span>
             <span className={styles.optionLabel}>{option.label}</span>
