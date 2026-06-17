@@ -1,9 +1,13 @@
+//Страница обо мне
 import { usePage } from '../../context/PageContext';
+import { useTheme } from '../../context/ThemeContext';
 import { NavigationButton } from './NavigationButton';
+import { getCursorColor } from '../../utils/themeColors';
 import styles from '../../styles/about.module.css';
 
 export function About() {
   const { setIsRevealed, setIsTransitioning} = usePage();
+  const { themeColor } = useTheme();
 
   const handleBackToHero = () => {
     setIsTransitioning(true);
@@ -15,12 +19,31 @@ export function About() {
     }, 300);
   };
 
+  // 👇 Получаем градиент для аватара в зависимости от темы
+  const getAvatarGradient = (color: string): string => {
+    const gradients: Record<string, string> = {
+      '#6c33ce': 'from-purple-500 to-pink-500',
+      '#ce4388': 'from-pink-500 to-rose-500',
+      '#06b6d4': 'from-cyan-500 to-blue-500',
+      '#84cc16': 'from-lime-500 to-emerald-500',
+    };
+    return gradients[color] || gradients['#6c33ce'];
+  };
+
+  const avatarGradient = getAvatarGradient(themeColor);
+  const cursorColor = getCursorColor(themeColor);
+
   return (
     <section className="min-h-screen flex items-center justify-center px-4">
       <div className="max-w-3xl mx-auto text-center">
         <div className={styles.avatar}>
-          {/* Здесь будет твоя фотография или иконка */}
-          <div className="w-32 h-32 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 mx-auto mb-6 flex items-center justify-center text-5xl">
+          {/* Аватар с динамическим градиентом */}
+          <div 
+            className={`w-32 h-32 rounded-full mx-auto mb-6 flex items-center justify-center text-5xl bg-gradient-to-br ${avatarGradient}`}
+            style={{
+              boxShadow: `0 0 40px ${cursorColor}33, 0 0 80px ${cursorColor}22`,
+            }}
+          >
             👩‍💻
           </div>
         </div>
