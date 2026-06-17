@@ -1,3 +1,4 @@
+//Приветственная страница
 import { useState } from 'react';
 import { usePage } from '../../context/PageContext';
 import styles from '../../styles/hero.module.css';

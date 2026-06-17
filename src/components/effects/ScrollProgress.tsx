@@ -1,3 +1,4 @@
+//Кружок с прогрессом просмотренных страниц
 import { usePage } from '../../context/PageContext';
 import styles from '../../styles/scrollProgress.module.css';
 

@@ -1,0 +1,159 @@
+.container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 99999;
+  animation: slideIn 0.6s cubic-bezier(0.2, 0.9, 0.4, 1) 0.3s both;
+}
+
+/* Кнопка-палитра */
+.toggleButton {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  position: relative;
+  z-index: 99999;
+}
+
+.toggleButton:hover {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+.icon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.colorDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  transition: background-color 0.3s ease;
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+}
+
+/* Выпадающее меню */
+.menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  min-width: 180px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 8px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  transform: scale(0.9) translateY(-10px);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1);
+  transform-origin: top right;
+  z-index: 99999;
+}
+
+.menuOpen {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* Опция цвета */
+.colorOption {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  background: transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.colorOption:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.colorOption.active {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.colorCircle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.colorOption:hover .colorCircle {
+  transform: scale(1.1);
+}
+
+.colorName {
+  flex: 1;
+  text-align: left;
+  font-size: 13px;
+}
+
+.checkmark {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* Анимация появления */
+@keyframes fadeInScale {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.menuOpen {
+  animation: fadeInScale 0.25s cubic-bezier(0.2, 0.9, 0.4, 1) forwards;
+}
+
+.container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  animation: slideIn 0.6s cubic-bezier(0.2, 0.9, 0.4, 1) 0.3s both;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(60px) scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+}

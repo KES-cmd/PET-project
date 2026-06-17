@@ -1,3 +1,4 @@
+//Вторая страница сайта с моими проектами
 import { useRef, useState, useEffect, useCallback } from 'react';
 import { galleryItems } from '../../data/galleryData';
 import styles from '../../styles/gallery.module.css';

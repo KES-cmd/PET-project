@@ -1,3 +1,4 @@
+//Описывает форму и состояние мышки
 import { useMousePosition } from '../../hooks/useMousePosition';
 import styles from '../../styles/cursor.module.css';
 import { useState, useEffect } from 'react';
@@ -10,7 +11,9 @@ export function CustomCursor() {
     const handleMouseOver = () => setIsHovering(true);
     const handleMouseOut = () => setIsHovering(false);
 
-    const interactiveElements = document.querySelectorAll('button, a, [role="button"]');
+    const interactiveElements = document.querySelectorAll(
+      'button:not([data-cursor-hidden]), a:not([data-cursor-hidden]), [role="button"]:not([data-cursor-hidden])'
+    );
     
     interactiveElements.forEach((el) => {
       el.addEventListener('mouseover', handleMouseOver);

@@ -6,6 +6,7 @@ import { Hero } from './components/effects/Hero';
 import { ScrollProgress } from './components/effects/ScrollProgress';
 import { Gallery } from './components/effects/Gallery';
 import { About } from './components/effects/About';
+import { ColorPicker } from './components/effects/ColorPicker';
 import morphingStyles from './styles/morphing.module.css';
 import noiseStyles  from './styles/noise.module.css';
 
@@ -17,6 +18,7 @@ function AppContent() {
       <CustomCursor />
       <MovingGradient />
       <ScrollProgress />
+      <ColorPicker />
       <div className={noiseStyles.noise}></div>
       
       {/* В режиме "всё открыто" — оборачиваем в обычный поток */}

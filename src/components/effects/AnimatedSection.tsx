@@ -1,3 +1,4 @@
+//Отвечает за сокрытие страниц при первом проходе и открытие всех после нажатия на кнопку на последней странице
 import { ReactNode, useEffect, useState } from 'react';
 import { usePage } from '../../context/PageContext';
 import styles from '../../styles/animatedSection.module.css';
