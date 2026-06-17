@@ -1,6 +1,8 @@
 //Вторая страница сайта с моими проектами
 import { useRef, useState, useEffect, useCallback } from 'react';
 import { galleryItems } from '../../data/galleryData';
+import { useTheme } from '../../context/ThemeContext';
+import { getCursorColor } from '../../utils/themeColors';
 import styles from '../../styles/gallery.module.css';
 import { NavigationButton } from './NavigationButton';
 import { usePage } from '../../context/PageContext';
@@ -13,6 +15,10 @@ export function Gallery() {
   const [scrollLeft, setScrollLeft] = useState(0);
   const [isInitialized, setIsInitialized] = useState(false);
   const { setActiveSection, setIsTransitioning } = usePage();
+  const { themeColor } = useTheme();
+
+  // Получаем цвет для индикаторов
+  const cursorColor = getCursorColor(themeColor);
 
   // Дублируем элементы для бесконечной прокрутки (3 копии)
   const totalItems = galleryItems.length;
@@ -236,7 +242,7 @@ export function Gallery() {
           </div>
         </div>
 
-        {/* Индикаторы */}
+        {/*  ИНДИКАТОРЫ — теперь динамические */}
         <div className="flex justify-center gap-3 mt-6">
           {galleryItems.map((_, index) => (
             <button
@@ -244,16 +250,20 @@ export function Gallery() {
               className={`
                 w-3 h-3 rounded-full transition-all duration-300
                 ${activeIndex === index 
-                  ? 'bg-purple-500 w-8' 
+                  ? 'w-8' 
                   : 'bg-white/30 hover:bg-white/50'
                 }
                 cursor-interactive
               `}
+              style={{
+                backgroundColor: activeIndex === index ? cursorColor : undefined,
+              }}
               onClick={() => scrollToSlide(index)}
               aria-label={`Перейти к слайду ${index + 1}`}
             />
           ))}
         </div>
+
         <div className="flex justify-center mt-8">
           <NavigationButton 
             onClick={handleOpenAbout} 
