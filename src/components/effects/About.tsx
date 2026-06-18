@@ -2,6 +2,7 @@
 import { usePage } from '../../context/PageContext';
 import { useTheme } from '../../context/ThemeContext';
 import { NavigationButton } from './NavigationButton';
+import { Footer } from './Footer';
 import { getCursorColor } from '../../utils/themeColors';
 import styles from '../../styles/about.module.css';
 
@@ -19,7 +20,7 @@ export function About() {
     }, 300);
   };
 
-  // 👇 Получаем градиент для аватара в зависимости от темы
+  // Получаем градиент для аватара в зависимости от темы
   const getAvatarGradient = (color: string): string => {
     const gradients: Record<string, string> = {
       '#6c33ce': 'from-purple-500 to-pink-500',
@@ -57,11 +58,11 @@ export function About() {
         </p>
         
         <div className="flex flex-wrap justify-center gap-4 mb-8">
-          <span className="px-4 py-2 bg-white/10 rounded-full text-sm">React</span>
-          <span className="px-4 py-2 bg-white/10 rounded-full text-sm">TypeScript</span>
-          <span className="px-4 py-2 bg-white/10 rounded-full text-sm">TailwindCSS</span>
-          <span className="px-4 py-2 bg-white/10 rounded-full text-sm">Framer Motion</span>
-          <span className="px-4 py-2 bg-white/10 rounded-full text-sm">GSAP</span>
+          <span className="px-4 py-2 bg-white/85 rounded-full text-sm">React</span>
+          <span className="px-4 py-2 bg-white/85 rounded-full text-sm">TypeScript</span>
+          <span className="px-4 py-2 bg-white/85 rounded-full text-sm">TailwindCSS</span>
+          <span className="px-4 py-2 bg-white/85 rounded-full text-sm">Framer Motion</span>
+          <span className="px-4 py-2 bg-white/85 rounded-full text-sm">GSAP</span>
         </div>
         
         <div className="flex justify-center">

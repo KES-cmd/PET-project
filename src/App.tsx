@@ -5,6 +5,7 @@ import { Header } from './components/effects/Header';
 import { Background } from './components/effects/Background';
 import { Hero } from './components/effects/Hero';
 import { ThemeProvider } from './context/ThemeContext';
+import { Footer } from './components/effects/Footer';
 //import { ScrollProgress } from './components/effects/ScrollProgress';
 import { Gallery } from './components/effects/Gallery';
 import { About } from './components/effects/About';
@@ -29,6 +30,7 @@ function AppContent() {
           <Hero />
           <Gallery />
           <About />
+          <Footer />
         </div>
       ) : (
         <>

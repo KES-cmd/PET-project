@@ -5,7 +5,7 @@ import { getHeaderGradient } from '../../utils/themeColors';
 import styles from '../../styles/cursorSwitcher.module.css';
 
 const cursorOptions: { id: CursorStyle; label: string; emoji: string }[] = [
-  { id: 'classic', label: 'Классический', emoji: '🌀' },
+  { id: 'classic', label: 'Классический', emoji: '⚪' },
   { id: 'neon', label: 'Неоновый', emoji: '💡' },
   { id: 'minimal', label: 'Минималистичный', emoji: '•' },
 ];

@@ -28,9 +28,11 @@
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
 }
 
-.icon {
-  font-size: 20px;
-  line-height: 1;
+.iconImage {
+  width: 40px;    /* регулируй размер под свой дизайн */
+  height: 40px;
+  object-fit: contain;
+  display: block;
 }
 
 .colorDot {

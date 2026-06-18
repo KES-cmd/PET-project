@@ -34,7 +34,11 @@ export function ColorPicker() {
         aria-label="Выбрать тему"
         title="Сменить тему"
       >
-        <span className={styles.icon}>🎨</span>
+        <img 
+          src="../images/palitra.png" 
+          alt="Палитра" 
+          className={styles.iconImage}
+        />
         <span 
           className={styles.colorDot}
           style={{ backgroundColor: themeColor }}
