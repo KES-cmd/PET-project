@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect  } from 'react';
 import { usePage } from '../../context/PageContext';
 import { useTheme } from '../../context/ThemeContext';
 import { getButtonGradient, getButtonGlow, getWordGradient } from '../../utils/themeColors';
@@ -6,8 +6,16 @@ import styles from '../../styles/hero.module.css';
 
 export function Hero() {
   const [isHovered, setIsHovered] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const { setActiveSection, setIsTransitioning } = usePage();
   const { themeColor } = useTheme();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 300);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleOpenGallery = () => {
     setIsTransitioning(true);
@@ -26,7 +34,7 @@ export function Hero() {
   return (
     <section className="min-h-screen flex items-center justify-center px-4 relative">
       <div className="max-w-4xl mx-auto text-center">
-        <h1 className="mb-6">
+        <h1 className={`mb-6 ${styles.title} ${isVisible ? styles.visible : ''}`}>
           Создаю 
           <span className={`
             text-transparent 
@@ -40,11 +48,11 @@ export function Hero() {
           сайты на заказ
         </h1>
 
-        <p className="text-gray-200 max-w-2xl mx-auto mb-10">
-          Делаю интерфейсы, которые хочется трогать и перелистывать
+        <p className={`text-gray-200 max-w-2xl mx-auto mb-10 ${styles.subtitle} ${isVisible ? styles.visible : ''}`}>
+          Frontend-разработчик с любовью к анимациям, микро-интеракциям и нестандартным решениям
         </p>
 
-        <div className="relative inline-block">
+        <div className={`relative inline-block ${styles.buttonWrapper} ${isVisible ? styles.visible : ''}`}>
           <button
             className={`
               relative px-10 py-4 rounded-full font-semibold text-white

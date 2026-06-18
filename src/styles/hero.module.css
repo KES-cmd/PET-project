@@ -42,3 +42,41 @@
     background-position: 100% 50%;
   }
 }
+
+/* Заголовок — анимация появления снизу с увеличением */
+.title {
+  opacity: 0;
+  transform: translateY(30px) scale(0.95);
+  transition: all 0.8s cubic-bezier(0.2, 0.9, 0.4, 1);
+}
+
+.title.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Подзаголовок — появление с задержкой */
+.subtitle {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s cubic-bezier(0.2, 0.9, 0.4, 1);
+  transition-delay: 0.2s;
+}
+
+.subtitle.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Кнопка — появление с задержкой */
+.buttonWrapper {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s cubic-bezier(0.2, 0.9, 0.4, 1);
+  transition-delay: 0.4s;
+}
+
+.buttonWrapper.visible {
+  opacity: 1;
+  transform: translateY(0);
+}

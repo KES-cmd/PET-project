@@ -1,6 +1,8 @@
 //import { MovingGradient } from './components/effects/MovingGradient';
+import { useState } from 'react';
 import { PageProvider, usePage } from './context/PageContext';
 import { AnimatedSection } from './components/effects/AnimatedSection';
+import { Preloader } from './components/effects/Preloader';
 import { Header } from './components/effects/Header';
 import { Background } from './components/effects/Background';
 import { Hero } from './components/effects/Hero';
@@ -18,6 +20,11 @@ import { CursorProvider } from './context/CursorContext';
 
 function AppContent() {
   const { isRevealed } = usePage();
+  const [isPreloaderComplete, setIsPreloaderComplete] = useState(false);
+
+  if (!isPreloaderComplete) {
+    return <Preloader onComplete={() => setIsPreloaderComplete(true)} />;
+  }
 
   return (
     <CursorProvider>
