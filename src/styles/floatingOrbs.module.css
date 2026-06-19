@@ -1,0 +1,177 @@
+.container {
+  position: fixed;
+  inset: 0;
+  z-index: -4;
+  pointer-events: none;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  border: 4px solid;
+  opacity: 1;
+  animation: float linear infinite alternate;
+  transition: border-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+.orb1 {
+  width: 400px;
+  height: 400px;
+  animation-duration: 70s;
+  animation-name: floatOrb1;
+  /* Старт за левым краем */
+  transform: translate(-120vw, 10vh);
+}
+
+.orb2 {
+  width: 280px;
+  height: 280px;
+  animation-duration: 40s;
+  animation-name: floatOrb2;
+  /* Старт за правым краем */
+  transform: translate(120vw, -20vh);
+}
+
+.orb3 {
+  width: 160px;
+  height: 160px;
+  animation-duration: 35s;
+  animation-name: floatOrb3;
+  /* Старт за нижним краем */
+  transform: translate(40vw, 120vh);
+}
+
+.orb4 {
+  width: 120px;
+  height: 120px;
+  animation-duration: 38s;
+  animation-name: floatOrb4;
+  /* Старт за верхним краем */
+  transform: translate(-30vw, -120vh);
+}
+
+.orb5 {
+  width: 200px;
+  height: 200px;
+  animation-duration: 32s;
+  animation-name: floatOrb5;
+  /* Старт за левым нижним углом */
+  transform: translate(-130vw, 130vh);
+}
+
+/* Анимации — хаотичное движение по всему экрану */
+@keyframes floatOrb1 {
+  0% { transform: translate(-120vw, 10vh); }
+  10% { transform: translate(65vw, -25vh); }
+  20% { transform: translate(-30vw, 45vh); }
+  30% { transform: translate(80vw, 30vh); }
+  40% { transform: translate(-45vw, -30vh); }
+  50% { transform: translate(55vw, 70vh); }
+  60% { transform: translate(-25vw, 15vh); }
+  70% { transform: translate(90vw, -15vh); }
+  80% { transform: translate(-40vw, 55vh); }
+  90% { transform: translate(70vw, -35vh); }
+  100% { transform: translate(15vw, 25vh); }
+}
+
+@keyframes floatOrb2 {
+  0% { transform: translate(120vw, -20vh); }
+  12.5% { transform: translate(-35vw, 35vh); }
+  25% { transform: translate(75vw, -30vh); }
+  37.5% { transform: translate(-50vw, 60vh); }
+  50% { transform: translate(85vw, 20vh); }
+  62.5% { transform: translate(-20vw, -25vh); }
+  75% { transform: translate(60vw, 80vh); }
+  87.5% { transform: translate(-45vw, 10vh); }
+  100% { transform: translate(25vw, -20vh); }
+}
+
+@keyframes floatOrb3 {
+  0% { transform: translate(40vw, 120vh); }
+  14.28% { transform: translate(55vw, -35vh); }
+  28.57% { transform: translate(-40vw, 50vh); }
+  42.85% { transform: translate(85vw, -20vh); }
+  57.14% { transform: translate(-30vw, 65vh); }
+  71.42% { transform: translate(70vw, 15vh); }
+  85.71% { transform: translate(-55vw, -25vh); }
+  100% { transform: translate(30vw, 45vh); }
+}
+
+@keyframes floatOrb4 {
+  0% { transform: translate(-30vw, -120vh); }
+  16.66% { transform: translate(-50vw, 40vh); }
+  33.33% { transform: translate(65vw, -40vh); }
+  50% { transform: translate(-35vw, 75vh); }
+  66.66% { transform: translate(80vw, 10vh); }
+  83.33% { transform: translate(-60vw, -20vh); }
+  100% { transform: translate(35vw, 55vh); }
+}
+
+@keyframes floatOrb5 {
+  0% { transform: translate(-130vw, 130vh); }
+  11.11% { transform: translate(60vw, -30vh); }
+  22.22% { transform: translate(-30vw, 55vh); }
+  33.33% { transform: translate(85vw, 25vh); }
+  44.44% { transform: translate(-45vw, -15vh); }
+  55.55% { transform: translate(50vw, 85vh); }
+  66.66% { transform: translate(-25vw, 35vh); }
+  77.77% { transform: translate(75vw, -40vh); }
+  88.88% { transform: translate(-35vw, 60vh); }
+  100% { transform: translate(20vw, 15vh); }
+}
+
+/* 📱 Адаптация для мобильных */
+@media (max-width: 768px) {
+  .orb1 { width: 280px; height: 280px; }
+  .orb2 { width: 200px; height: 200px; }
+  .orb3 { width: 140px; height: 140px; }
+  .orb4 { width: 90px; height: 90px; }
+  .orb5 { width: 160px; height: 160px; }
+
+  .orb1 { animation-duration: 8s, 35s, 1s; }
+  .orb2 { animation-duration: 10s, 40s, 1s; }
+  .orb3 { animation-duration: 6s, 30s, 1s; }
+  .orb4 { animation-duration: 9s, 38s, 1s; }
+  .orb5 { animation-duration: 7s, 32s, 1s; }
+
+  @keyframes floatOrb1 {
+    0% { transform: translate(-120vw, 10vh); }
+    20% { transform: translate(70vw, -15vh); }
+    40% { transform: translate(-25vw, 55vh); }
+    60% { transform: translate(80vw, 25vh); }
+    80% { transform: translate(-30vw, -10vh); }
+    100% { transform: translate(15vw, 35vh); }
+  }
+
+  @keyframes floatOrb2 {
+    0% { transform: translate(120vw, -20vh); }
+    25% { transform: translate(-30vw, 45vh); }
+    50% { transform: translate(75vw, -20vh); }
+    75% { transform: translate(-20vw, 60vh); }
+    100% { transform: translate(25vw, 10vh); }
+  }
+
+  @keyframes floatOrb3 {
+    0% { transform: translate(40vw, 120vh); }
+    33% { transform: translate(60vw, -25vh); }
+    66% { transform: translate(-25vw, 50vh); }
+    100% { transform: translate(20vw, 15vh); }
+  }
+
+  @keyframes floatOrb4 {
+    0% { transform: translate(-30vw, -120vh); }
+    50% { transform: translate(-35vw, 40vh); }
+    100% { transform: translate(50vw, -15vh); }
+  }
+
+  @keyframes floatOrb5 {
+    0% { transform: translate(-130vw, 130vh); }
+    25% { transform: translate(50vw, -10vh); }
+    50% { transform: translate(-25vw, 45vh); }
+    75% { transform: translate(65vw, 20vh); }
+    100% { transform: translate(10vw, 30vh); }
+  }
+}

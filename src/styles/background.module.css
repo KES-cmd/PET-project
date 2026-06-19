@@ -3,27 +3,29 @@
   inset: 0;
   z-index: -10;
   background: #0d0d0d;
-  background-image: url('/images/bg.png');
+  /* Если хочешь использовать картинку — раскомментируй */
+  /* background-image: url('/images/bg.png');
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat; */
 }
 
+/* Затемнение поверх фона (если есть картинка) */
 .background::before {
   content: '';
   position: fixed;
   inset: 0;
   z-index: -9;
-  background: rgba(0, 0, 0, 0.5); /* Затемнение (прозрачность можно менять) */
+  background: rgba(0, 0, 0, 0.6);  
+  pointer-events: none;
 }
-
 
 /* Шумовая текстура (поверх фона) */
 .background::after {
   content: '';
   position: fixed;
   inset: 0;
-  z-index: -9;
+  z-index: -8;
   pointer-events: none;
   opacity: 0.03;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");

@@ -11,6 +11,7 @@ import { Footer } from './components/effects/Footer';
 //import { ScrollProgress } from './components/effects/ScrollProgress';
 import { Gallery } from './components/effects/Gallery';
 import { About } from './components/effects/About';
+import { FloatingOrbs } from './components/effects/FloatingOrbs';
 //import { ColorPicker } from './components/effects/ColorPicker';
 //import { CursorSwitcher } from './components/effects/CursorSwitcher';
 import { CustomCursor } from './components/effects/CustomCursor';
@@ -30,6 +31,7 @@ function AppContent() {
     <CursorProvider>
       <CustomCursor />
       <Background />
+      <FloatingOrbs />
       <Header />
 
       {isRevealed ? (
